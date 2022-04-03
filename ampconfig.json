@@ -1,0 +1,19 @@
+{
+  "dataServiceGeneratorVersion": "0.12.3",
+  "appInfo": {
+    "name": "ORM",
+    "description": "",
+    "version": "qbltepjj",
+    "id": "cl1iuy0em112663701s6yn2ap831",
+    "url": "https://app.amplication.com/cl1iuy0em112663701s6yn2ap831",
+    "settings": {
+      "dbHost": "localhost",
+      "dbName": "orm",
+      "dbPassword": "admin",
+      "dbPort": 5432,
+      "dbUser": "admin",
+      "appId": "cl1iuy0em112663701s6yn2ap831",
+      "authProvider": "Jwt"
+    }
+  }
+}

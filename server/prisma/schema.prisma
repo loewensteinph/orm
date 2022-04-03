@@ -1,0 +1,62 @@
+datasource postgres {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime @default(now())
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     String[]
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model Loss {
+  accounts         Account[]
+  createdAt        DateTime  @default(now())
+  id               String    @id @default(cuid())
+  measures         Measure[]
+  shortDescription String?
+  szenario         Szenario? @relation(fields: [szenarioId], references: [id])
+  szenarioId       String?
+  updatedAt        DateTime? @default(now())
+}
+
+model Account {
+  amount    Float
+  createdAt DateTime             @default(now())
+  id        String               @id @default(cuid())
+  loss      Loss                 @relation(fields: [lossId], references: [id])
+  lossId    String
+  riskType  EnumAccountRiskType?
+  updatedAt DateTime             @updatedAt
+}
+
+model Measure {
+  createdAt DateTime   @default(now())
+  id        String     @id @default(cuid())
+  loss      Loss[]
+  szenario  Szenario[]
+  updatedAt DateTime   @updatedAt
+}
+
+model Szenario {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  losses    Loss[]
+  measures  Measure[]
+  updatedAt DateTime  @updatedAt
+}
+
+enum EnumAccountRiskType {
+  MarketRisk
+  OpRisk
+  CreditRisk
+}
